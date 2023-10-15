@@ -1,0 +1,1 @@
+https://gist.githubusercontent.com/codewithbernard/237c572b34f18cc6ed3d7f029192fb8f/raw/0e032163ba1915f0fdc4d63f73413452de2a9153/chatgpt-builder.txt
