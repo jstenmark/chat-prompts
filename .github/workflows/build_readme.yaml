@@ -1,0 +1,49 @@
+name: build_readme
+
+on:
+  push:
+      paths:
+      - 'stubs/**'
+      - 'prompts/**'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  build_readme:
+    runs-on: ubuntu-latest
+    if: contains(toJSON(github.event.commits[0].added), 'stubs') || contains(toJSON(github.event.commits[0].added), 'prompts')
+    steps:
+      - name: Check for changes in stubs or prompts
+        id: changes
+        run: echo "::set-output name=changed::$(git diff --name-only HEAD~1...HEAD | grep -E 'stubs/|prompts/')"
+
+      - uses: actions/checkout@v2
+        if: steps.changes.outputs.changed != ''
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v4
+        if: steps.changes.outputs.changed != ''
+        with:
+          python-version: '3.11'
+
+      - name: Generate from stub
+        if: steps.changes.outputs.changed != ''
+        run: python utils/stub_handler.py || echo "Stub generation failed."
+
+      - name: Commit files
+        if: steps.changes.outputs.changed != ''
+        run: |
+          git config --local user.email "johannes@stenmark.in"
+          git config --local user.name "JStenmark"
+          git add README.md
+          git commit -m "CI: Updated content: README.md" || echo "Nothing to commit."
+
+      - name: Push changes
+        if: steps.changes.outputs.changed != ''
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          force: true
