@@ -19,6 +19,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          repository: https://github.com/jstenmark/prompts.git
+          repository: jstenmark/prompts
           github_token: ${{ secrets.GH_TOKEN }}
           force: true
+          branch: ${{ github.ref }}
