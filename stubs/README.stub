@@ -1,0 +1,49 @@
+**ChatGPT-prompt-builder**:
+
+[gist:codewithbernard/chatgpt-builder.txt](https://gist.github.com/codewithbernard/237c572b34f18cc6ed3d7f029192fb8f)
+<details>
+  <summary>Prompt</summary>
+
+    {{{prompt-builder}}}
+
+</details>
+
+---
+
+**ChatGPT-AutoExpert (GPT4)**:
+
+[spdustin/ChatGPT-AutoExpert](https://github.com/spdustin/ChatGPT-AutoExpert)
+
+---
+
+**ChatGPT data validation**:
+
+<details>
+  <summary>Prompt</summary>
+
+    {{{data-validation}}}
+
+</details>
+
+---
+
+# Instructions
+
+{{{instruction-personal}}}
+
+
+{{{instruction-logical}}}
+
+
+{{{instruction-response-direct}}}
+
+
+{{{instruction-response-organized}}}
+
+
+{{{instruction-response-short}}}
+
+---
+
+{{{personal-assistant}}}
+

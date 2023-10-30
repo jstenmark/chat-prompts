@@ -1,0 +1,22 @@
+name: update-prompt-engineer.md
+
+on: [push]
+
+jobs:
+  build_prompt_index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+      - name: Generate from stub
+        run: python utils/stub_handler.py
+      - name: Commit files
+        run: |
+          git config --local user.name "JStenmark"
+          git add README.md
+          git commit -m "CI: Updated content: README.md"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          force: true
