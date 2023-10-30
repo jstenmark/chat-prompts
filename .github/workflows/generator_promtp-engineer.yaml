@@ -1,17 +1,18 @@
-name: update-prompt-engineer.md
+name: update-readme
 
 on: [push]
 
 jobs:
-  build_prompt_index:
+  build_readme:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v2
       - name: Generate from stub
         run: python utils/stub_handler.py
       - name: Commit files
         run: |
+          git config --local user.email "johannes@stenmark.in"
           git config --local user.name "JStenmark"
           git add README.md
           git commit -m "CI: Updated content: README.md"
