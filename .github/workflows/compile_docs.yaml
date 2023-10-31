@@ -3,8 +3,10 @@ name: build_readme
 on:
   push:
       paths:
+      - 'utils/**/*'
       - 'stubs/**/*'
       - 'prompts/**/*'
+      - '.github/**/*'
 
 env:
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
