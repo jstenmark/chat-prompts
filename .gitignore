@@ -1,4 +1,3 @@
-.vscode/
-learning-ml.md
-tools.md
+.vscode
 .venv
+.priv

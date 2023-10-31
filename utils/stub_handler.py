@@ -1,33 +1,26 @@
 import re
-import os
+from os import path
 
-def extract_template_vars_with_indent(stub_content):
-    templates = []
-    for match in re.finditer(r'(.*?[^{])\{{{(.*?)\}}}', stub_content):
-        before_content = match.group(1)
-        template_name = match.group(2)
-        templates.append([before_content, template_name, before_content + "{{{" + template_name + "}}}"])
-    return templates
+re_stub = re.compile(r'([ \t]*)(\{{{\s*(.*?)\s*}}})')
 
+def read_file(file_path):
+    with open(file_path, 'r') as f:
+        return f.read()
+
+def get_template(indent, var, file):
+    return (indent, indent + var, read_file(f"prompts/{file}.md") )
 
 def compile_stub_with_content(file):
-    with open(f'stubs/{file}.stub', 'r') as f:
-        stub_content = f.read()
+    stub = read_file(f'stubs/{file}.stub')
 
-    templates = extract_template_vars_with_indent(stub_content)
-    for indent, template_name, template_string in templates:
-        content_path = os.path.join('prompts', f"{template_name}.md")
-        if os.path.exists(content_path):
-            with open(content_path, 'r') as f:
-                content_data = f.read()
-
-            indented_content = '\n'.join([indent + line for line in content_data.splitlines()])
-
-            stub_content = stub_content.replace(template_string, indented_content)
-        else:
-            print(f"Warning: File {content_path} does not exist.")
-
+    for indent, tag, content in [get_template(*m.groups()) for m in re_stub.finditer(stub)]:
+        indented_content = '\n'.join(indent+line for line in content.splitlines())
+        stub = stub.replace(tag, indented_content)
     with open(f'{file}.md', 'w') as f:
-        f.write(stub_content)
+        f.write(stub)
 
-compile_stub_with_content("README")
+if __name__ == "__main__":
+    compile_stub_with_content("instructions")
+    compile_stub_with_content("coding")
+    compile_stub_with_content("prompts")
+    compile_stub_with_content("README")
