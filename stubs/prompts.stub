@@ -1,7 +1,15 @@
 # Prompt Engineering #
 
+<details>
+  <summary>prompt-builder</summary>
+
 {{{prompt-builder}}}
 
----
+</details>
+
+<details>
+  <summary>prompt-builder-short</summary>
 
 {{{prompt-builder-short}}}
+
+</details>

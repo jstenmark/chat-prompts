@@ -1,15 +1,29 @@
 # Instructions
 
+<details>
+  <summary>instruction-effective</summary>
+
 {{{instruction-effective}}}
 
----
+</details>
+
+<details>
+  <summary>instruction-logical</summary>
 
 {{{instruction-logical}}}
 
----
+</details>
+
+<details>
+  <summary>instruction-precise</summary>
 
 {{{instruction-precise}}}
 
----
+</details>
+
+<details>
+  <summary>instruction-structured</summary>
 
 {{{instruction-structured}}}
+
+</details>
