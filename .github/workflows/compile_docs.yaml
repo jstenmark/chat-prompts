@@ -21,13 +21,14 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Generate from stub
-        run: python utils/stub_handler.py || echo "Stub generation failed."
+      - name: Compile stubs
+        run: python utils/stub_handler.py
 
       - name: Commit files
         run: |
           git config --local user.email "johannes@stenmark.in"
           git config --local user.name "JStenmark"
+          ls -lha
           git add *.md
           git commit -m "CI: Updated content" || echo "Nothing to commit."
 
