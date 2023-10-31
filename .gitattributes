@@ -1,4 +1,3 @@
-README.md       -dif merge=binary
-instructions.md -dif merge=binary
-coding.md -dif merge=binary
-stubs/*.stub       linguist-language=Markdown
+*.md            -dif merge=binary
+stubs/*.stub    linguist-language=Markdown
+prompts/*.md    linguist-language=Markdown
